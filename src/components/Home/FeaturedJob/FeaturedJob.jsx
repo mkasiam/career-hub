@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { IoLocationOutline } from "react-icons/io5";
+import { AiOutlineDollarCircle } from "react-icons/ai";
 
 const FeaturedJob = ({ job }) => {
   const {
@@ -28,14 +30,22 @@ const FeaturedJob = ({ job }) => {
         </button>
       </div>
       <div className="flex gap-6">
-        <p>{location}</p>
-        <p>Slaray: {salary}</p>
+        <p className="flex justify-center items-center gap-1 text-lg">
+          <IoLocationOutline></IoLocationOutline>
+          {location}
+        </p>
+        <p className="flex justify-center items-center gap-1 text-lg">
+          <AiOutlineDollarCircle></AiOutlineDollarCircle>
+          Slaray: {salary}
+        </p>
       </div>
-      <Link to={`/jobDetails/${id}`}>
-        <button className="px-4 py-2 rounded-md bg-[#8688FE] text-white font-semibold">
-          View Details
-        </button>
-      </Link>
+      <div>
+        <Link to={`/jobDetails/${id}`}>
+          <button className="px-4 py-2 rounded-md bg-[#8688FE] text-white font-semibold">
+            View Details
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };

@@ -1,10 +1,21 @@
 import { useLoaderData, useParams } from "react-router-dom";
 
+import {
+  AiOutlineDollarCircle,
+  AiFillPhone,
+  AiOutlineMail,
+  AiTwotoneHome,
+  AiOutlineCalendar,
+} from "react-icons/ai";
+
+import { saveIdsToLocalStorage } from "../utility/JobsIdLocalStorage.js";
+
 const JobDetails = () => {
-  const { id } = useParams();
+  const { jobsId } = useParams();
   const jobs = useLoaderData();
-  const targetedJob = jobs.find((job) => job.id === +id);
+  const targetedJob = jobs.find((job) => job.id === +jobsId);
   const {
+    id,
     job_description,
     job_responsibility,
     educational_requirements,
@@ -14,7 +25,9 @@ const JobDetails = () => {
     job_title,
   } = targetedJob;
   const { phone, email, address } = contact_information;
-  console.log(phone, email, address);
+  const handleApplyJobs = (id) => {
+    saveIdsToLocalStorage(+id);
+  };
   return (
     <div>
       <h1 className="text-center text-5xl py-8">Job Details</h1>
@@ -48,13 +61,36 @@ const JobDetails = () => {
         <div className="w-1/3 space-y-2">
           <span className="font-bold">Job Details</span>
           <hr />
-          <p>Salary: {salary}</p>
-          <p>Job Title: {job_title}</p>
-          <span className="font-bold">Contact Information</span>
+          <p className="flex items-center text-lg gap-2">
+            <AiOutlineDollarCircle></AiOutlineDollarCircle>
+            <span className="font-bold">Salary: </span>
+            {salary}
+          </p>
+          <p className="flex items-center text-lg gap-2">
+            <AiOutlineCalendar />
+            <span className="font-bold">Job Title:</span>
+            {job_title}
+          </p>
+          <p className="font-bold">Contact Information</p>
           <hr />
-          <p>Phone: {phone}</p>
-          <p>Email: {email}</p>
-          <p>Address: {address}</p>
+          <p className="flex items-center text-lg gap-2">
+            <AiFillPhone />
+            Phone: {phone}
+          </p>
+          <p className="flex items-center text-lg gap-2">
+            <AiOutlineMail />
+            Email: {email}
+          </p>
+          <p className="flex  text-lg gap-2">
+            <AiTwotoneHome className="mt-1" />
+            Address: {address}
+          </p>
+          <button
+            onClick={() => handleApplyJobs(id)}
+            className="w-full btn btn-primary text-white"
+          >
+            Apply Now
+          </button>
         </div>
       </div>
     </div>
