@@ -8,7 +8,11 @@ import {
   AiOutlineCalendar,
 } from "react-icons/ai";
 
-import { saveIdsToLocalStorage } from "../utility/JobsIdLocalStorage.js";
+import {
+  getIdsFromLocalStorage,
+  saveIdsToLocalStorage,
+} from "../utility/JobsIdLocalStorage.js";
+import Swal from "sweetalert2";
 
 const JobDetails = () => {
   const { jobsId } = useParams();
@@ -26,7 +30,23 @@ const JobDetails = () => {
   } = targetedJob;
   const { phone, email, address } = contact_information;
   const handleApplyJobs = (id) => {
-    saveIdsToLocalStorage(+id);
+    const isExists = getIdsFromLocalStorage().includes(id);
+    if (!isExists) {
+      saveIdsToLocalStorage(+id);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Your work has been saved",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Already Applied",
+      });
+    }
   };
   return (
     <div>

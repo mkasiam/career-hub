@@ -8,11 +8,20 @@ const getIdsFromLocalStorage = () => {
 
 const saveIdsToLocalStorage = (id) => {
   const appliedJobs = getIdsFromLocalStorage();
-  const exists = appliedJobs.find((job) => job.id === id);
-  if (!exists) {
+  if (!appliedJobs.includes(id)) {
     appliedJobs.push(id);
     localStorage.setItem("jobs", JSON.stringify(appliedJobs));
   }
 };
 
-export { saveIdsToLocalStorage, getIdsFromLocalStorage };
+const removeIdFromLocalStorage = (id) => {
+  let appliedJobs = getIdsFromLocalStorage();
+  appliedJobs = appliedJobs.filter((jobId) => jobId !== id);
+  localStorage.setItem("jobs", JSON.stringify(appliedJobs));
+};
+
+export {
+  saveIdsToLocalStorage,
+  getIdsFromLocalStorage,
+  removeIdFromLocalStorage,
+};
