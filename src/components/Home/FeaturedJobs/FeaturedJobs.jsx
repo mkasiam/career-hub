@@ -16,9 +16,14 @@ const FeaturedJobs = () => {
           <FeaturedJob key={job.id} job={job}></FeaturedJob>
         ))}
       </div>
-      <div className="flex justify-center my-8">
-        <button className="btn btn-outline btn-primary">Show All Jobs</button>
-      </div>
+      {jobs.length !== dataLength && (
+        <div
+          onClick={() => setDataLength(jobs.length)}
+          className="flex justify-center my-8"
+        >
+          <button className="btn btn-outline btn-primary">Show All Jobs</button>
+        </div>
+      )}
     </div>
   );
 };

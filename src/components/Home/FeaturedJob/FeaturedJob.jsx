@@ -1,3 +1,6 @@
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+
 const FeaturedJob = ({ job }) => {
   const {
     id,
@@ -28,11 +31,17 @@ const FeaturedJob = ({ job }) => {
         <p>{location}</p>
         <p>Slaray: {salary}</p>
       </div>
-      <button className="px-4 py-2 rounded-md bg-[#8688FE] text-white font-semibold">
-        View Details
-      </button>
+      <Link to={`/jobDetails/${id}`}>
+        <button className="px-4 py-2 rounded-md bg-[#8688FE] text-white font-semibold">
+          View Details
+        </button>
+      </Link>
     </div>
   );
+};
+
+FeaturedJob.propTypes = {
+  job: PropTypes.object,
 };
 
 export default FeaturedJob;
