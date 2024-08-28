@@ -1,14 +1,11 @@
 import { useState } from "react";
 import FeaturedJob from "../FeaturedJob/FeaturedJob";
+import useFetch from "../../hooks/useFetch";
 
 const FeaturedJobs = () => {
-  const [jobs, setJobs] = useState([]);
+  const [jobs, loading] = useFetch('/jobs.json');
   const [dataLength, setDataLength] = useState(4);
-  useState(() => {
-    fetch("../../../../public/jobs.json")
-      .then((res) => res.json())
-      .then((data) => setJobs(data));
-  }, []);
+ 
   return (
     <div>
       <div className="grid grid-cols-2 gap-10">

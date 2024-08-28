@@ -36,7 +36,7 @@ const JobDetails = () => {
       Swal.fire({
         position: "center",
         icon: "success",
-        title: "Your work has been saved",
+        title: "Succesfully Applied",
         showConfirmButton: false,
         timer: 1500,
       });
